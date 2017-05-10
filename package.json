@@ -51,6 +51,8 @@
     "rimraf": "^2.6.0",
     "url-loader": "^0.5.8",
     "vue-loader": "^11.1.4",
+    "node-sass": "^4.5.2",
+    "sass-loader": "^6.0.3",
     "vue-style-loader": "^2.0.0",
     "vue-template-compiler": "^2.2.4",
     "webpack": "^2.2.1",
