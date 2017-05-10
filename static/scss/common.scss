@@ -1,5 +1,25 @@
 //@import "common/scss/minxin.scss";
 
+.pull-left{
+	float: left!important;
+}
+.pull-right{
+	float: right!important;
+}
+
+.clearfix{
+	&:before,
+  &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+
+
 @media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2){
 	.border-1px{
 		&:after{
