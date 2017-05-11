@@ -31,12 +31,24 @@
   	</div>
 
     <div class="detail" v-show="detailShow">
-      
+      <div class="detail-wrapper">
+        <div class="container">
+          <p class="name">{{seller.name}}</p>
+          <div class="star-wrapper">
+            <star></star>
+          </div>
+          <p>{{seller.bulletin}}</p>
+        </div>
+      </div>
+      <div class="detail-close">
+        <i class="icon-close" @click="closeDetail"></i>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+  import star from '../star/star';
 export default {
   props: {
     seller: {
@@ -51,7 +63,13 @@ export default {
   methods: {
     showDetail() {
       this.detailShow = true;
+    },
+    closeDetail() {
+      this.detailShow = false;
     }
+  },
+  component: {
+    star
   },
   created() {
     this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
@@ -173,7 +191,7 @@ export default {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      background-color: rgba(7,17,27,.2);
+      background-color: rgba($brand-bg,.2);
       .bulletin-title{
         display: inline-block;
         vertical-align: top;
@@ -196,7 +214,6 @@ export default {
         font-size: 10px;
       }
 		}
-
     .detail{
       position: fixed;
       left: 0;
@@ -204,7 +221,32 @@ export default {
       width: 100%;
       height: 100%;
       overflow: auto;
-      background-color: rgba(7,17,27,.8);
+      background-color: rgba($brand-bg,.8);
+      .detail-wrapper{
+        padding: 64px 36px 96px;
+        width: 100%;
+        min-height: 100%;
+        box-sizing: border-box;
+      }
+      .container{
+        .name{
+          line-height: 32px;
+          font-weight: 700;
+          font-size: 16px;
+        }
+      }
+      .detail-close{
+        position: relative;
+        margin-top: -96px;
+        width: 100%;
+        height: 96px;
+        text-align: center;
+        i{
+          line-height: 96px;
+          font-size: 32px;
+          color:rgba($white,.5);
+        }
+      }
     }
 	}
 </style>
