@@ -29,26 +29,44 @@
   		<span class="bulletin-title"></span><span class="bulletin-text">{{seller.bulletin}}</span>
       <i class="iconfont icon-keyboard_arrow_right"></i>
   	</div>
-
-    <div class="detail" v-show="detailShow">
-      <div class="detail-wrapper">
-        <div class="container">
-          <p class="name">{{seller.name}}</p>
-          <div class="star-wrapper">
-            <star></star>
+    
+    <transition name="fade">
+      <div class="detail" v-show="detailShow">
+        <div class="detail-wrapper">
+          <div class="container">
+            <p class="name">{{seller.name}}</p>
+            <div class="star-wrapper">
+              <star :size="48" :score="seller.score"></star>
+            </div>
+            <div class="title">
+              <div class="line"></div>
+              <div class="text">优惠信息</div>
+              <div class="line"></div>
+            </div>
+            <div class="supports-wrapper" v-if="seller.supports">
+              <supports :seller="seller"></supports>
+            </div>
+            <div class="title">
+              <div class="line"></div>
+              <div class="text">商家公告</div>
+              <div class="line"></div>
+            </div>
+            <div class="bulletin">
+              <p>{{seller.bulletin}}</p>
+            </div>
           </div>
-          <p>{{seller.bulletin}}</p>
+        </div>
+        <div class="detail-close">
+          <i class="icon-close" @click="closeDetail"></i>
         </div>
       </div>
-      <div class="detail-close">
-        <i class="icon-close" @click="closeDetail"></i>
-      </div>
-    </div>
+    </transition>
   </div>
 </template>
 
 <script>
   import star from '../star/star';
+  import supports from '../supports/supports';
 export default {
   props: {
     seller: {
@@ -68,8 +86,8 @@ export default {
       this.detailShow = false;
     }
   },
-  component: {
-    star
+  components: {
+    star, supports
   },
   created() {
     this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
@@ -214,39 +232,78 @@ export default {
         font-size: 10px;
       }
 		}
-    .detail{
-      position: fixed;
-      left: 0;
-      top: 0;
+  }
+  .detail{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba($brand-bg,.8);
+    .detail-wrapper{
+      padding: 64px 36px 96px;
       width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba($brand-bg,.8);
-      .detail-wrapper{
-        padding: 64px 36px 96px;
-        width: 100%;
-        min-height: 100%;
-        box-sizing: border-box;
-      }
+      min-height: 100%;
+      box-sizing: border-box;
       .container{
         .name{
           line-height: 32px;
           font-weight: 700;
           font-size: 16px;
-        }
-      }
-      .detail-close{
-        position: relative;
-        margin-top: -96px;
-        width: 100%;
-        height: 96px;
-        text-align: center;
-        i{
-          line-height: 96px;
-          font-size: 32px;
-          color:rgba($white,.5);
+          text-align: center;
         }
       }
     }
-	}
+    .star-wrapper{
+      margin-top: 18px;
+      padding: 2px 0;
+      text-align: center;
+    }
+    .title{
+      display: flex;
+      margin: 28px auto 24px;
+      width: 80%;
+      font-size: 14px;
+      .line{
+        flex: 1;
+        position: relative;
+        top: -6px;
+        border-bottom: 1px solid rgba($white,.2);
+      }
+      .text{
+        padding: 0 12px;
+        font-weight: 700;
+      }
+    }
+    .supports-wrapper{
+      margin: 0 auto;
+      width: 80%;
+    }
+    .bulletin{
+      padding: 0 24px;
+      p{
+        font-size: 12px;
+        line-height: 24px;
+      }
+    }
+    .detail-close{
+      position: relative;
+      margin-top: -96px;
+      width: 100%;
+      height: 96px;
+      text-align: center;
+      i{
+        line-height: 96px;
+        font-size: 32px;
+        color:rgba($white,.5);
+      }
+    }
+  }
+  .fade-enter-active, .fade-leave-active{
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-active{
+    opacity: 0;
+  }
 </style>
