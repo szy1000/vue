@@ -241,6 +241,7 @@ export default {
     height: 100%;
     overflow: auto;
     background-color: rgba($brand-bg,.8);
+    backdrop-filter: blur(10px);
     .detail-wrapper{
       padding: 64px 36px 96px;
       width: 100%;
