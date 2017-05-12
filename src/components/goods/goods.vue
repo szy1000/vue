@@ -48,6 +48,7 @@
 <style scoped lang="scss">
   @import "../../common/common.scss";
 	.goods{
+		display: flex;
 		position: absolute;
 		top: 176px;
 		bottom: 46px;
