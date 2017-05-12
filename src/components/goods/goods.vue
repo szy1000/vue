@@ -14,7 +14,26 @@
   	<div class="foods-wrapper">
   		<ul>
   			<li v-for="item in goods" class="food-list">
-  				<h1 class="title">{{item.name}}</h1>
+  				<h2 class="title">{{item.name}}</h2>
+  				<ul>
+  					<li v-for="food in item.foods" class="food-item">
+  						<div class="icon">
+  							<img :src="food.icon" alt="">
+  						</div>
+  						<div class="content">
+  							<h2 class="name">{{food.name}}</h2>
+  							<p class="description">{{food.description}}</p>
+  							<div class="extra">
+  								<span class="count">月售{{food.sellCount}}份</span>
+  								<span>好评率{{food.rating}}%</span>
+  							</div>
+  							<div class="price">
+  								<span class="now">¥{{food.price}}</span>
+  								<span class="oldPrice" v-show="food.oldPrice">{{food.oldPrice}}</span>
+  							</div>
+  						</div>
+  					</li>
+  				</ul>
   			</li>
   		</ul>
   	</div>
