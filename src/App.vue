@@ -41,6 +41,8 @@
 </script>
 
 <style scoped lang="scss">
+  @import "./common/common.scss";
+
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -50,6 +52,7 @@
       width: 100%;
       height: 40px;
       line-height: 40px;
+      @include border-1px(rgba($brand-bg,.1));
       .tab-item{
         flex: 1;
         text-align: center;
