@@ -18,7 +18,7 @@
   				<ul>
   					<li v-for="food in item.foods" class="food-item">
   						<div class="icon">
-  							<img :src="food.icon" alt="">
+  							<img width="57" height="57" :src="food.icon" alt="">
   						</div>
   						<div class="content">
   							<h2 class="name">{{food.name}}</h2>
@@ -77,7 +77,7 @@
 			flex: 0 0 80px;
 			height: 100%;
 			width: 80px;
-			background-color: #f3f5f7;
+			background-color: $food-font;
 			.menu-item{
 				display: table;
 				padding: 0 12px;
@@ -122,6 +122,61 @@
 		}
 		.foods-wrapper{
 			flex: 1;
+			.title{
+				padding-left: 14px;
+				line-height: 26px;
+				font-size: 12px;
+				background-color: $food-font;
+				border-left: 1px solid #d9dde1;
+			}
+			.food-item{
+				display: flex;
+				margin: 18px;
+				padding-bottom: 18px;
+				@include border-1px(rgba($brand-bg,.1));
+				&:last-child(){
+					margin-bottom: 0;
+					@include border-none();
+				}
+				.icon{
+					flex: 0 0 57px;
+					margin-right: 10px;
+				}
+				.content{
+					flex: 1;
+					.name{
+						line-height: 14px;
+						font-size: 14px;
+						color: $brand-bg;
+					}
+					.description,.extra{
+						line-height: 10px;
+						font-size: 10px;
+						color: $description-color;
+						.count{
+							margin-right: 12px;
+						}
+					}
+					.description{
+						margin: 8px 0;
+					}
+					.price{
+						line-height: 24px;
+						font-weight: 700;
+						.now{
+							margin-right: 8px;
+							font-size: 14px;
+							color: $brand-red;
+						}
+						.old{
+							text-decoration: line-through;
+							font-size: 10px;
+							color: $description-color;
+						}
+						// font-size: 10px;
+					}
+				}
+			}
 		}
 	}
 </style>
