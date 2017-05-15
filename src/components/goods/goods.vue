@@ -2,7 +2,7 @@
   <div class="goods">
   	<div class="menu-wrapper" ref="menuWrapper">
   		<ul>
-  			<li v-for="(item,index) in goods" class="menu-item" :class = "{'current':currentIndex === index }">
+  			<li v-for="(item,index) in goods" class="menu-item" :class = "{'current':currentIndex === index }" @click="selectMenu(index,$event)">
   				<span class="text">
 						<span v-show="item.type>0" class="icon" :class="classMap[item.type]">
   					</span> 
@@ -37,11 +37,15 @@
   			</li>
   		</ul>
   	</div>
+    <shopcart></shopcart>
+
   </div>
 </template>
 
 <script>
 	import BScroll from 'better-scroll';
+  import shopcart from '../../components/shopcart/shopcart';
+
 	const ERR = 0;
 	export default {
 		props: {
@@ -53,16 +57,19 @@
 			return {
 				goods: [],
 				listHeight: [],
-				scrollY: 0,
-				currentIndex: 0
+				scrollY: 0
+				// currentIndex: 0
 			};
+		},
+		components: {
+			shopcart
 		},
 		computed: {
 			currentIndex () {
 				for (let i = 0; i < this.listHeight.length; i++) {
 					let height1 = this.listHeight[i];
 					let height2 = this.listHeight[i + 1];
-					if (!height2 || (this.scrollY > height1 && this.scrollY < height2)) {
+					if (!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {
 						return i;
 					}
 				}
@@ -84,9 +91,9 @@
 		methods: {
 			_initScroll () {
 				this.menuScroll = new BScroll(this.$refs.menuWrapper, {
-
+					click: true
 				});
-				this.menuScroll = new BScroll(this.$refs.foodWrapper, {
+				this.foodScroll = new BScroll(this.$refs.foodWrapper, {
 					probeType: 3
 				});
 				this.foodScroll.on('scroll', (pos) => {
@@ -94,7 +101,7 @@
 				});
 			},
 			_calculateHeight () {
-				let foodList = this.$refs.foodWrapper.getElementsByName('food-list-hook');
+				let foodList = this.$refs.foodWrapper.getElementsByClassName('food-list-hook');
 				let height = 0;
 				this.listHeight.push(height);
 				for (let i = 0; i < foodList.length; i++) {
@@ -102,6 +109,15 @@
 					height += item.clientHeight;
 					this.listHeight.push(height);
 				}
+			},
+			selectMenu (index, event) {
+				if (!event._constructed) {
+					return;
+				}
+				let foodList = this.$refs.foodWrapper.getElementsByClassName('food-list-hook');
+				let el = foodList[index];
+				this.foodScroll.scrollToElement(el, 300);
+				// console.log(index);
 			}
 		}
 	};
