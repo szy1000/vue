@@ -1,6 +1,6 @@
 <template>
   <div class="seller">
-  	<img :src="seller.avatar" alt="">
+  	<img :src="seller.avatar" alt="test">
   </div>
 </template>
 
@@ -15,5 +15,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+	
 </style>

@@ -8,10 +8,10 @@
   				</div>
   			</div>
   			<div class="price">
-  				dsa
+  				¥{{0}}
   			</div>
   			<div class="desc">
-  				das
+  				另需配送费¥{{seller}}元
   			</div>
   		</div>
   		<div class="content-right"></div>
@@ -21,7 +21,11 @@
 
 <script>
 	export default {
-
+		props: {
+			seller: {
+				type: Object
+			}
+		}
 	};
 </script>
 
@@ -44,6 +48,17 @@
 					display: inline-block;
 				}
 			}
+			.price,.desc{
+				vertical-align: top;
+				margin: 0 12px 12px 0;
+				font-size: 24px;
+				color: rgba($white,.4);
+				line-height: 24px;
+			}
+			.desc{
+				margin: 0;
+				font-size: 16px;
+			}
 			.content-right{
 				flex: 0 0 105px;
 				width: 105px;
@@ -60,6 +75,7 @@
 			border-radius: 50%;
 			background-color: #141d27;
 			.logo{
+				margin: 0 auto;
 				width: 38px;
 				height: 38px;
 				border-radius: 50%;
