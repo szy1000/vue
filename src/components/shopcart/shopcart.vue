@@ -11,10 +11,14 @@
   				¥{{0}}
   			</div>
   			<div class="desc">
-  				另需配送费¥{{seller}}元
+  				另需配送费¥{{deliveryPrice}}元
   			</div>
   		</div>
-  		<div class="content-right"></div>
+  		<div class="content-right">
+  			<div class="pay">
+  				¥{{minPrice}}起送
+  			</div>
+  		</div>
   	</div>
   </div>
 </template>
@@ -22,8 +26,13 @@
 <script>
 	export default {
 		props: {
-			seller: {
-				type: Object
+			deliveryPrice: {
+				type: Number,
+				default: 0
+			},
+			minPrice: {
+				type: Number,
+				default: 0
 			}
 		}
 	};
@@ -37,11 +46,12 @@
 		left: 0;
 		bottom: 0;
 		width: 100%;
-		height: 48px;
+		// height: 48px;
 		.content{
 			display: flex;
 			background-color: #141d27;
 			.content-left{
+				height: 48px;
 				flex: 1;
 				font-size: 0;
 				&>div{
@@ -50,14 +60,21 @@
 			}
 			.price,.desc{
 				vertical-align: top;
-				margin: 0 12px 12px 0;
-				font-size: 24px;
-				color: rgba($white,.4);
+				margin-top: 12px;
+				padding-right: 12px;
 				line-height: 24px;
+				color: rgba($white,.4);
+			}
+			.price{
+				font-size: 16px;
+				color: rgba($white,.4);				
+				font-weight: 700;
+				border-right: 1px solid rgba($white,.1);
 			}
 			.desc{
-				margin: 0;
-				font-size: 16px;
+				margin: 12px 0 0 12px;
+				color: rgba($white,.4);				
+				font-size: 10px;
 			}
 			.content-right{
 				flex: 0 0 105px;
@@ -67,26 +84,36 @@
 
 		.logo-wrapper{
 			position: relative;
-			top: -12px;
+			top: -10px;
 			margin: 0 12px; 
 			padding: 6px;
-			width: 50px;
-			height: 50px;
+			width: 56px;
+			height: 56px;
+			box-sizing: border-box;
 			border-radius: 50%;
 			background-color: #141d27;
 			.logo{
-				margin: 0 auto;
-				width: 38px;
-				height: 38px;
 				border-radius: 50%;
 				background-color: rgba($white,.2);
 				text-align: center;
-				line-height: 24px;
 				span{
 					line-height: 44px;
 					font-size: 24px;
 					color: rgba($white, .4);
 				}
+			}
+		}
+
+		.content-right{
+			.pay{
+				height: 48px;
+				line-height: 48px;
+				text-align: center;
+				font-size: 12px;
+				color: rgba($white,.4);
+				font-weight: 700;
+				// width: 100%;
+				background-color: #2b333b;
 			}
 		}
 	}
